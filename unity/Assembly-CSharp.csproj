@@ -84,6 +84,7 @@
      <Compile Include="Assets\Scripts\LipSync\LipSyncScrub.cs" />
      <Compile Include="Assets\Scripts\LipSync\LipSyncTranslate.cs" />
      <Compile Include="Assets\Scripts\PathLoader.cs" />
+     <Compile Include="Assets\Scripts\TrailFollower.cs" />
      <Compile Include="Assets\UnityOSC\OSC\OSCBundle.cs" />
      <Compile Include="Assets\UnityOSC\OSC\OSCClient.cs" />
      <Compile Include="Assets\UnityOSC\OSC\OSCMessage.cs" />
