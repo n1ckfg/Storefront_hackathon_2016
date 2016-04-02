@@ -23,6 +23,7 @@ public class PathLoader : MonoBehaviour {
 
 	IEnumerator loadPaths() {
 		while(true) {
+			Debug.Log("Loading paths...");
 			yield return StartCoroutine(loadPath());
 			yield return new WaitForSeconds(checkTime);
 		}
@@ -36,40 +37,47 @@ public class PathLoader : MonoBehaviour {
 		string[] pathLines = www.text.Split("\n"[0]);
 
 		for (int i = 0; i < pathLines.Length; i++) {
-			string[] pathLine = pathLines[i].Split(","[0]);
+//			 try {
+				string[] pathLine = pathLines[i].Split(","[0]);
 
-			string newId = pathLine[0];
+				string newId = pathLine[0];
 
-			if (!seenIds.Contains(newId)) {
-				seenIds.Add(newId);
+				if (!seenIds.Contains(newId)) {
+					seenIds.Add(newId);
 
-				path = new List<Vector3>();
+					path = new List<Vector3>();
 
-				if (is3d) {
-					for (int j = 1; j < pathLine.Length; j += 3) {
-						float x = float.Parse(pathLine[j]);
-						float y = float.Parse(pathLine[j + 1]);
-						float z = float.Parse(pathLine[j + 2]);
+					if (is3d) {
+						for (int j = 1; j < pathLine.Length; j += 3) {
+							float x = float.Parse(pathLine[j]);
+							float y = float.Parse(pathLine[j + 1]);
+							float z = float.Parse(pathLine[j + 2]);
 
-						addPathPoint(x, y, z);
+							addPathPoint(x, y, z);
+						}
+					} else {
+						for (int j = 1; j < pathLine.Length; j += 2) {
+							if(pathLine[j] != "") {
+								float x = float.Parse(pathLine[j]);
+								float y = float.Parse(pathLine[j + 1]);
+								float z = 0f;
+
+								addPathPoint(x, y, z); 
+							}
+						}					
 					}
-				} else {
-					for (int j = 1; j < pathLine.Length; j += 2) {
-						float x = float.Parse(pathLine[j]);
-						float y = float.Parse(pathLine[j + 1]);
-						float z = 0f;
 
-						addPathPoint(x, y, z); 
-					}					
+					GameObject g = (GameObject) Instantiate(prefab, Vector3.zero, Quaternion.identity); 
+					Debug.Log("Spawning");
+					TrailFollower t = g.GetComponent<TrailFollower>();
+					t.path = path;
+					t.go = true;
+					//trailFollowers.Add(t);
 				}
-
-				GameObject g = (GameObject) Instantiate(prefab, Vector3.zero, Quaternion.identity); 
-				Debug.Log("Spawning");
-				TrailFollower t = g.GetComponent<TrailFollower>();
-				t.path = path;
-				t.go = true;
-				//trailFollowers.Add(t);
-			}
+//			} catch(System.Exception e) {
+//				Debug.LogError(e.Message);
+//				continue;
+//			}
 		}
 
 		/*
@@ -85,7 +93,7 @@ public class PathLoader : MonoBehaviour {
 	void addPathPoint(float x, float y, float z) {
 		if (x != null && y != null && z!= null) {
 			Vector3 v = new Vector3(x, y, z);
-			Debug.Log(v);
+//			Debug.Log(v);
 			path.Add(v); 
 		}	
 	}
