@@ -7,6 +7,7 @@ using System.Collections.Generic;
 [AddComponentMenu("Character/Cardboard Input Controller Simple")]
 public class CardboardInputControllerSimple : MonoBehaviour {
     
+	public bool alwaysOn = false;
 	public float creepThresholdAngle = 0f;
 	public float jumpThresholdAngle = 0f;
 
@@ -34,15 +35,11 @@ public class CardboardInputControllerSimple : MonoBehaviour {
 				directionVector = new Vector3(0f, 0f, 0f);
 				touchActivated = false;
 			}
-
-			if (touchActivated) { 
-				directionVector = Quaternion.Euler(new Vector3 (0f, -transform.rotation.eulerAngles.y, 0f)) * head.transform.forward;
-			}
 		#endif
 
-		#if UNITY_STANDALONE_OSX || UNITY_EDITOR
-			directionVector = head.transform.localRotation * new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-		#endif
+		if (touchActivated || alwaysOn) {
+			directionVector = Quaternion.Euler(new Vector3 (0f, -transform.rotation.eulerAngles.y, 0f)) * head.transform.forward;
+		}
 
         if (directionVector != Vector3.zero) { 
             // Get the length of the directon vector and then normalize it
