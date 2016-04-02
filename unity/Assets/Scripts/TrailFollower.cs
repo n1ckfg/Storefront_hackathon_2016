@@ -39,7 +39,7 @@ public class TrailFollower : MonoBehaviour {
 		easeVec = new Vector3(ease, ease, ease);
 		boundsVec = new Vector3(bounds, bounds, bounds);
 
-		//StartCoroutine(lifeCycle());
+		StartCoroutine(lifeCycle());
 	}
 
 	void Update() {
@@ -74,6 +74,13 @@ public class TrailFollower : MonoBehaviour {
 
 	IEnumerator lifeCycle() {
 		yield return new WaitForSeconds(lifeSpan);
+		var lineRendererMaterial = target.gameObject.GetComponent<LineRenderer>().material;
+		var a = lineRendererMaterial.color.a;
+		while(lineRendererMaterial.color.a > 0.01f) {
+			a -= Time.deltaTime;
+			lineRendererMaterial.color = new Color(1, 1, 1, a);
+			yield return null;
+		}
 		Destroy(gameObject);
 	}
 
