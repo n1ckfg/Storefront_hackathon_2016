@@ -9,11 +9,11 @@ public class PathLoader : MonoBehaviour {
 	public GameObject prefab;
 	public bool is3d = false;
 	public float checkTime = 1f;
+	public AudioClip spawnClip;
 
 	//[HideInInspector] public List<TrailFollower> trailFollowers;
 	[HideInInspector] public List<Vector3> path;
 
-	private float markTime = 0f;
 	private HashSet<string> seenIds;
 
 	void Start() {
@@ -68,6 +68,7 @@ public class PathLoader : MonoBehaviour {
 					}
 
 					GameObject g = (GameObject) Instantiate(prefab, Vector3.zero, Quaternion.identity); 
+					Tone.SpawnClip(spawnClip);
 					Debug.Log("Spawning");
 					TrailFollower t = g.GetComponent<TrailFollower>();
 					t.path = path;

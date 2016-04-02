@@ -85,6 +85,7 @@
      <Compile Include="Assets\Scripts\LipSync\LipSyncTranslate.cs" />
      <Compile Include="Assets\Scripts\PathLoader.cs" />
      <Compile Include="Assets\Scripts\TrailFollower.cs" />
+     <Compile Include="Assets\Tone.cs" />
      <None Include="Assets\GoldenZebra\Image Effects\BloomPro\Shaders\Resources\FxProTap.shader" />
      <None Include="Assets\Cardboard\Resources\SkyboxMesh.shader" />
      <None Include="Assets\Cardboard\Distortion\CardboardDistortion.cginc" />
