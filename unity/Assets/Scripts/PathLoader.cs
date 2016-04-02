@@ -7,10 +7,13 @@ public class PathLoader : MonoBehaviour {
 
 	public string url = "http://fox-gieg.com/stuff/test.csv";
 	public GameObject prefab;
+	public bool is3d = false;
 
 	[HideInInspector] public List<TrailFollower> trailFollowers;
 	[HideInInspector] public List<Vector3> path;
 	[HideInInspector] public List<string> id;
+
+	private float markTime = 0f;
 
 	void Start() {
 		StartCoroutine(loadPath()); 
@@ -40,13 +43,22 @@ public class PathLoader : MonoBehaviour {
 
 				path = new List<Vector3>();
 
-				for (int j = 1; j < pathLine.Length; j += 3) {
-					float x = float.Parse(pathLine[j]);
-					float y = float.Parse(pathLine[j + 1]);
-					float z = float.Parse(pathLine[j + 2]);
-					Vector3 v = new Vector3(x, y, z);
-					Debug.Log(v);
-					path.Add(v); 
+				if (is3d) {
+					for (int j = 1; j < pathLine.Length; j += 3) {
+						float x = float.Parse(pathLine[j]);
+						float y = float.Parse(pathLine[j + 1]);
+						float z = float.Parse(pathLine[j + 2]);
+
+						addPathPoint(x, y, z);
+					}
+				} else {
+					for (int j = 1; j < pathLine.Length; j += 2) {
+						float x = float.Parse(pathLine[j]);
+						float y = float.Parse(pathLine[j + 1]);
+						float z = 0f;
+
+						addPathPoint(x, y, z);
+					}					
 				}
 
 				GameObject g = (GameObject) Instantiate(prefab, Vector3.zero, Quaternion.identity); 
@@ -56,6 +68,14 @@ public class PathLoader : MonoBehaviour {
 				trailFollowers.Add(t);
 			}
 		}
+	}
+
+	void addPathPoint(float x, float y, float z) {
+		if (x != null && y != null && z!= null) {
+			Vector3 v = new Vector3(x, y, z);
+			Debug.Log(v);
+			path.Add(v); 
+		}	
 	}
 
 }
