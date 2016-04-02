@@ -1,9 +1,9 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PathLoader.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/TrailFollower.cs">
     <Files>
-      <File FileName="Assets/Scripts/PathLoader.cs" Line="48" Column="5" />
-      <File FileName="Assets/Scripts/TrailFollower.cs" Line="36" Column="94" />
+      <File FileName="Assets/Scripts/TrailFollower.cs" Line="42" Column="5" />
+      <File FileName="Assets/Scripts/PathLoader.cs" Line="56" Column="13" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

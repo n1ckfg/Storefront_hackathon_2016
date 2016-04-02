@@ -96,21 +96,15 @@
      <None Include="Assets\Shaders\nick_backface.shader" />
      <None Include="Assets\GoldenZebra\Image Effects\BloomPro\Shaders\Resources\FxPro.shader" />
      <None Include="Assets\Cardboard\Resources\UI\CardboardReticleShader.shader" />
+     <None Include="Assets\Shaders\Particle Add.shader" />
      <None Include="Assets\Cardboard\Resources\SolidColor.shader" />
      <None Include="Assets\GoldenZebra\Image Effects\BloomPro\Demo\Skybox.shader" />
- <Reference Include="Assembly-UnityScript-firstpass">
- <HintPath>/Users/nick/Projects/Storefront/Storefront_hackathon_2016/unity/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{518622B2-9050-A153-E465-3E4BD155181A}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

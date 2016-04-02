@@ -7,42 +7,74 @@ public class TrailFollower : MonoBehaviour {
 	public float ease = 10f;
 	public float bounds = 0.1f;
 	public bool startAtPos = false;
-	public Vector3 rot = Vector3.zero;
+	public float rot = 1;
+	public Vector3 rotAxis = Vector3.up;
+	public float targetOffset = 1;
+	public float lifeSpan = 10f;
 
 	[HideInInspector] public string id;
 	[HideInInspector] public List<Vector3> path;
 	[HideInInspector] public int counter = 0;
 	[HideInInspector] public bool go = false;
 	[HideInInspector] public Transform target;
+	[HideInInspector] public float markTime = 0f;
 
 	private Vector3 easeVec;
 	private Vector3 boundsVec;
 	private GameObject player;
+	private bool firstRun = true;
+	private LineRenderer lineRen;
 
 	void Start() {
 		player = GameObject.FindGameObjectWithTag("Player");
+
 		transform.position = player.transform.position;
 		transform.SetParent(player.transform);
 
 		target = transform.FindChild("TrailObject");
+		target.localPosition = Random.onUnitSphere * targetOffset;
+
+		lineRen = target.GetComponent<LineRenderer>();
 
 		easeVec = new Vector3(ease, ease, ease);
 		boundsVec = new Vector3(bounds, bounds, bounds);
+
+		//StartCoroutine(lifeCycle());
 	}
 
 	void Update() {
 		if (go) {
+			if (firstRun) {
+				markTime = Time.realtimeSinceStartup;
+
+				lineRen.SetVertexCount(path.Count);
+				for (int i=0; i<path.Count; i++) {
+					Vector3 v = path[i];
+					v.y *= -1f;
+					lineRen.SetPosition(i, v);
+				}
+				firstRun = false;
+			}
+
+			/*
 			if (path[counter] != null) {
-				target.transform.position = tween(target.transform.position, player.transform.position + path[counter], easeVec);
+				target.transform.position = tween(target.transform.position, path[counter], easeVec);
 
 				if (hitDetect(target.transform.position, boundsVec, path[counter], boundsVec)) {
 					counter++;
 					if (counter >= path.Count) counter = 0;
 				}
 			}
+			*/
 
-			transform.Rotate(rot);
+			target.transform.RotateAround(transform.position, rotAxis, rot * Time.deltaTime);
+			// transform.Rotate(rot);
 		}
+	}
+
+	IEnumerator lifeCycle() {
+		yield return new WaitForSeconds(lifeSpan);
+		Destroy(gameObject);
 	}
 
 	Vector3 tween(Vector3 v1, Vector3 v2, Vector3 e) {

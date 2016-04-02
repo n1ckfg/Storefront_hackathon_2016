@@ -10,22 +10,21 @@ public class PathLoader : MonoBehaviour {
 	public bool is3d = false;
 	public float checkTime = 1f;
 
-	[HideInInspector] public List<TrailFollower> trailFollowers;
+	//[HideInInspector] public List<TrailFollower> trailFollowers;
 	[HideInInspector] public List<Vector3> path;
-	[HideInInspector] public List<string> id;
 
 	private float markTime = 0f;
+	private HashSet<string> seenIds;
 
 	void Start() {
-		//
+		seenIds = new HashSet<string>();
+		StartCoroutine(loadPaths());
 	}
 
-	void Update() {
-		float t = Time.realtimeSinceStartup;
-		if (t > markTime + checkTime) {
-			markTime = t;
-
-			StartCoroutine(loadPath()); 
+	IEnumerator loadPaths() {
+		while(true) {
+			yield return StartCoroutine(loadPath());
+			yield return new WaitForSeconds(checkTime);
 		}
 	}
 
@@ -41,14 +40,8 @@ public class PathLoader : MonoBehaviour {
 
 			string newId = pathLine[0];
 
-			bool addNewId = true;
-
-			for (int j = 0; j < id.Count; j++) {
-				if (newId == id[j]) addNewId = false;
-			}
-
-			if (addNewId) {
-				id.Add(newId);
+			if (!seenIds.Contains(newId)) {
+				seenIds.Add(newId);
 
 				path = new List<Vector3>();
 
@@ -66,17 +59,27 @@ public class PathLoader : MonoBehaviour {
 						float y = float.Parse(pathLine[j + 1]);
 						float z = 0f;
 
-						addPathPoint(x, y, z);
+						addPathPoint(x, y, z); 
 					}					
 				}
 
 				GameObject g = (GameObject) Instantiate(prefab, Vector3.zero, Quaternion.identity); 
+				Debug.Log("Spawning");
 				TrailFollower t = g.GetComponent<TrailFollower>();
 				t.path = path;
 				t.go = true;
-				trailFollowers.Add(t);
+				//trailFollowers.Add(t);
 			}
 		}
+
+		/*
+		for (int i=0; i<trailFollowers.Count; i++) {
+			if (!trailFollowers[i].alive) {
+				Destroy(trailFollowers[i].gameObject);
+				trailFollowers.RemoveAt(i);
+			}
+		}
+		*/
 	}
 
 	void addPathPoint(float x, float y, float z) {
