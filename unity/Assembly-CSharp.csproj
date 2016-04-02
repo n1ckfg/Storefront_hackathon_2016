@@ -72,6 +72,9 @@
      <Compile Include="Assets\Cardboard\Scripts\VRDevices\CardboardAndroidDevice.cs" />
      <Compile Include="Assets\Cardboard\Scripts\VRDevices\CardboardiOSDevice.cs" />
      <Compile Include="Assets\Cardboard\Scripts\VRDevices\UnityEditorDevice.cs" />
+     <Compile Include="Assets\GoldenZebra\Image Effects\BloomPro\Scripts\BloomHelper.cs" />
+     <Compile Include="Assets\GoldenZebra\Image Effects\BloomPro\Scripts\BloomPro.cs" />
+     <Compile Include="Assets\GoldenZebra\Image Effects\BloomPro\Scripts\RenderTextureManager.cs" />
      <Compile Include="Assets\Scripts\CardboardCharacterSimple\CardboardInputControllerSimple.cs" />
      <Compile Include="Assets\Scripts\CardboardCharacterSimple\CharacterMotor.cs" />
      <Compile Include="Assets\Scripts\LipSync\LipSyncBlend.cs" />
@@ -82,19 +85,32 @@
      <Compile Include="Assets\Scripts\LipSync\LipSyncTranslate.cs" />
      <Compile Include="Assets\Scripts\PathLoader.cs" />
      <Compile Include="Assets\Scripts\TrailFollower.cs" />
+     <None Include="Assets\GoldenZebra\Image Effects\BloomPro\Shaders\Resources\FxProTap.shader" />
      <None Include="Assets\Cardboard\Resources\SkyboxMesh.shader" />
      <None Include="Assets\Cardboard\Distortion\CardboardDistortion.cginc" />
+     <None Include="Assets\GoldenZebra\Image Effects\BloomPro\Demo\Reflect-Glossy.shader" />
      <None Include="Assets\Cardboard\Resources\UnlitTexture.shader" />
+     <None Include="Assets\GoldenZebra\Image Effects\BloomPro\Shaders\Resources\BloomPro.shader" />
      <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
+     <None Include="Assets\GoldenZebra\Image Effects\BloomPro\Shaders\Resources\SeparableBlur.cginc" />
      <None Include="Assets\Shaders\nick_backface.shader" />
+     <None Include="Assets\GoldenZebra\Image Effects\BloomPro\Shaders\Resources\FxPro.shader" />
      <None Include="Assets\Cardboard\Resources\UI\CardboardReticleShader.shader" />
      <None Include="Assets\Cardboard\Resources\SolidColor.shader" />
+     <None Include="Assets\GoldenZebra\Image Effects\BloomPro\Demo\Skybox.shader" />
+ <Reference Include="Assembly-UnityScript-firstpass">
+ <HintPath>/Users/nick/Projects/Storefront/Storefront_hackathon_2016/unity/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{518622B2-9050-A153-E465-3E4BD155181A}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

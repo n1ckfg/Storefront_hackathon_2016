@@ -8,6 +8,7 @@ public class PathLoader : MonoBehaviour {
 	public string url = "http://fox-gieg.com/stuff/test.csv";
 	public GameObject prefab;
 	public bool is3d = false;
+	public float checkTime = 1f;
 
 	[HideInInspector] public List<TrailFollower> trailFollowers;
 	[HideInInspector] public List<Vector3> path;
@@ -16,9 +17,17 @@ public class PathLoader : MonoBehaviour {
 	private float markTime = 0f;
 
 	void Start() {
-		StartCoroutine(loadPath()); 
+		//
 	}
 
+	void Update() {
+		float t = Time.realtimeSinceStartup;
+		if (t > markTime + checkTime) {
+			markTime = t;
+
+			StartCoroutine(loadPath()); 
+		}
+	}
 
 	IEnumerator loadPath() {
 		Debug.Log(url);

@@ -33,7 +33,7 @@ public class TrailFollower : MonoBehaviour {
 	void Update() {
 		if (go) {
 			if (path[counter] != null) {
-				target.transform.position = tween(target.transform.position, path[counter], easeVec);
+				target.transform.position = tween(target.transform.position, player.transform.position + path[counter], easeVec);
 
 				if (hitDetect(target.transform.position, boundsVec, path[counter], boundsVec)) {
 					counter++;
